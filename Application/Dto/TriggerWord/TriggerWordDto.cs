@@ -1,3 +1,5 @@
+using System;
+
 namespace Dto.TriggerWord;
 
 public record TriggerWordDto(
