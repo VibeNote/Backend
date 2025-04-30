@@ -1,0 +1,6 @@
+﻿services:
+  application:
+    image: application
+    build:
+      context: .
+      dockerfile: Application/Dockerfile
