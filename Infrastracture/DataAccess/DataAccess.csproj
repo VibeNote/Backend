@@ -10,4 +10,13 @@
       <Folder Include="obj\Debug\net8.0\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataAccess.Abstractions\DataAccess.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>

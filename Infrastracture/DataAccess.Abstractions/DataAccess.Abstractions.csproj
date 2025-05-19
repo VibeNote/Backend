@@ -10,4 +10,12 @@
       <Folder Include="obj\Debug\net8.0\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Domain\Core\Core.csproj" />
+    </ItemGroup>
+
 </Project>
