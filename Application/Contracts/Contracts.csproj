@@ -10,4 +10,8 @@
       <Folder Include="obj\Debug\net8.0\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Mediator.Abstractions" Version="2.1.7" />
+    </ItemGroup>
+
 </Project>
