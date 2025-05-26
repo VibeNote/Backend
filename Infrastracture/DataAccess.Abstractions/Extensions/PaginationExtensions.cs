@@ -1,7 +1,7 @@
 using Common.Pagination;
 using Microsoft.EntityFrameworkCore;
 
-namespace FloraPlanet.DataAccess.Abstractions.Extensions;
+namespace DataAccess.Abstractions.Extensions;
 
 public static class PaginationExtensions
 {

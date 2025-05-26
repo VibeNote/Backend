@@ -1,5 +1,3 @@
-using System;
-
 namespace Dto.User;
 
 public record UpdateUserDto(

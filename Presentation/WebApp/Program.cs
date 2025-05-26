@@ -1,12 +1,14 @@
-﻿using DataAccess.Extensions;
+﻿using System.Text;
+using DataAccess.Extensions;
 using DotNetEnv;
-using FloraPlanet.WebApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using WebApp.Configuration;
+using WebApp.Extensions;
 using WebApp.Extensions.Configuration;
 
 Env.Load();
@@ -20,11 +22,6 @@ var webAppConfiguration = new WebAppConfiguration(configuration);
 
 builder.Services.ConfigureWebApplication(webAppConfiguration);
 
-builder.Services.AddLocalization(options =>
-{
-    options.ResourcesPath = "Resources";
-});
-
 builder.Services
     .AddMvc(options =>
     {
@@ -32,6 +29,19 @@ builder.Services
     });
 
 builder.Services.AddTransient<WebAppConfiguration>();
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(webAppConfiguration.TokenInfoConfiguration.Secret)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = false
+        };
+    });
 
 var app = builder.Build().Configure(webAppConfiguration);
 

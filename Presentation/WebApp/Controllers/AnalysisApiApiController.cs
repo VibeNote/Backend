@@ -1,11 +1,14 @@
-using FloraPlanet.WebApp.Abstractions.Controllers.Api;
+using Contracts.Analysis.Commands;
 using Mediator;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Abstractions.Controllers;
+using WebApp.Extensions;
 
 namespace WebApp.Controllers;
 
 [ApiController]
-[Route("/api/Images")]
+[Route("/analysis/")]
 public class AnalysisApiApiController : ControllerBase, IAnalysisApiController
 {
     private readonly IMediator _mediator;
@@ -15,9 +18,15 @@ public class AnalysisApiApiController : ControllerBase, IAnalysisApiController
         _mediator = mediator;
     }
 
-    [HttpPost]
-    public Task<IActionResult> AnalyseById(Guid entryId, CancellationToken cancellationToken)
+    
+    [HttpPost("{id}")]
+    [Authorize]
+    public async Task<IActionResult> AnalyseById(Guid entryId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var userId = User.GetId();
+
+        var analysisResponse = await _mediator.Send(new AnalyseEntry.Command(userId, entryId), cancellationToken);
+
+        return Ok(analysisResponse.Analysis);
     }
 }

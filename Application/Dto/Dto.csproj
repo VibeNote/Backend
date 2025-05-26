@@ -7,8 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Analysis\" />
-      <Folder Include="Entry\" />
       <Folder Include="obj\Debug\net8.0\" />
     </ItemGroup>
 

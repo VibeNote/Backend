@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Abstractions.Models.Entry;
 
-namespace FloraPlanet.WebApp.Abstractions.Controllers.Api;
+namespace WebApp.Abstractions.Controllers;
 
 public interface IAnalysisApiController
 {

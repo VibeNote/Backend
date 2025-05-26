@@ -1,4 +1,4 @@
-﻿namespace FloraPlanet.WebApp.Configuration;
+﻿namespace WebApp.Configuration;
 
 public class PostgreSqlConfiguration
 {

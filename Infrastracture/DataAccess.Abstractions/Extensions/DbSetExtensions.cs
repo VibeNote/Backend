@@ -19,4 +19,16 @@ public static class DbSetExtensions
 
         return entity;
     }
+    
+    public static async Task<TEntity?> FindByIdAsync<TEntity, TKey>(
+        this DbSet<TEntity> dbSet,
+        TKey key,
+        CancellationToken cancellationToken = default)
+        where TEntity : class
+        where TKey : IEquatable<TKey>
+    {
+        var entity = await dbSet.FindAsync([key], cancellationToken);
+
+        return entity;
+    }
 }

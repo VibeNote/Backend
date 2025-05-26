@@ -1,7 +1,12 @@
+using Contracts.Entry.Commands;
+using Contracts.Entry.Queries;
+using Dto.Entry;
 using Mediator;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Abstractions.Controllers;
 using WebApp.Abstractions.Models.Entry;
+using WebApp.Extensions;
 
 namespace WebApp.Controllers;
 
@@ -15,21 +20,38 @@ public class EntryApiController: ControllerBase, IEntryApiController
         _mediator = mediator;
     }
 
+    
     [HttpGet]
-    public Task<IActionResult> GetUserEntries(CancellationToken cancellationToken)
+    [Authorize]
+    public async Task<IActionResult> GetUserEntries(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var userId = User.GetId();
+        var entriesResponse = await _mediator.Send(new GetUserEntries.Query(userId), cancellationToken);
+
+        return Ok(entriesResponse.Entries);
     }
 
+    
     [HttpPost]
-    public Task<IActionResult> Save(SaveEntryModel saveEntryModel, CancellationToken cancellationToken)
+    [Authorize]
+    public async Task<IActionResult> Save(SaveEntryModel saveEntryModel, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var userId = User.GetId();
+        
+        
+        var saveResponse = await _mediator.Send(new SaveEntry.Command(userId, new InputEntryDto(saveEntryModel.Content)), cancellationToken);
+
+        return Ok(saveResponse.Entry);
     }
 
-    [HttpGet]
-    public Task<IActionResult> GetFullInfo(Guid entryId, CancellationToken cancellationToken)
+    
+    [HttpGet("{id}")]
+    [Authorize]
+    public async Task<IActionResult> GetFullInfo(Guid entryId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var userId = User.GetId();
+
+        var entryResponse = await _mediator.Send(new GetEntry.Query(userId, entryId), cancellationToken);
+        return Ok(entryResponse.Entry);
     }
 }

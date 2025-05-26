@@ -1,12 +1,9 @@
-﻿using System.Globalization;
-using FloraPlanet.WebApp.Configuration;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Localization;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using WebApp.Configuration;
 
-namespace FloraPlanet.WebApp.Extensions;
+namespace WebApp.Extensions;
 
 public static class StartupExtensions
 {

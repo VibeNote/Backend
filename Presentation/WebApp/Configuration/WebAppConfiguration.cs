@@ -1,4 +1,4 @@
-﻿using FloraPlanet.WebApp.Configuration;
+﻿using DataAccess.EntityConfiguration;
 using Microsoft.Extensions.Configuration;
 using WebApp.Extensions.Configuration;
 
@@ -10,6 +10,6 @@ public class WebAppConfiguration
     {
         PostgreSqlConfiguration = configuration.GetSection<PostgreSqlConfiguration>();
     }
-
     public PostgreSqlConfiguration PostgreSqlConfiguration { get; }
+    public TokenInfoConfiguration TokenInfoConfiguration { get; }
 }

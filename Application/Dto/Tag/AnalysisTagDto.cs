@@ -4,5 +4,6 @@ using Dto.TriggerWord;
 namespace Dto.Tag;
 
 public record AnalysisTagDto(
-    AnalysisTagInfoDto Info,
+    TagDto Tag,
+    int Value,
     IReadOnlyCollection<TriggerWordDto> TriggerWords);

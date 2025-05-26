@@ -1,5 +1,5 @@
 namespace Dto.User;
 
 public record CredentialsDto(
-    string Email,
+    string Login,
     string Password);
