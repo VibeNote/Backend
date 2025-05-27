@@ -10,4 +10,14 @@
       <Folder Include="obj\Debug\net8.0\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.11.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Application.Abstractions\Application.Abstractions.csproj" />
+      <ProjectReference Include="..\DataAccess.Abstractions\DataAccess.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -21,11 +21,11 @@ public class Entry: IEntity<Guid>
     [Column("UserId")]
     public Guid UserId { get; protected set; }
     [Column("Content")]
-    public string Content { get; protected set; }
+    public string Content { get; set; }
     [Column("CreatedAt")]
     public DateTime CreatedAt { get; protected set; }
     [Column("UpdatedAt")]
-    public DateTime UpdatedAt { get; protected set; }
+    public DateTime UpdatedAt { get; set; }
 
     public virtual Analysis? Analysis { get; protected set; } = null;
 }

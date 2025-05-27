@@ -7,4 +7,4 @@ public record EntryFullInfoDto(
     string Content,
     DateTime CreatedAt,
     DateTime UpdatedAt,
-    EntryAnalysisDto Analysis);
+    EntryAnalysisDto? Analysis);

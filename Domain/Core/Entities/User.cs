@@ -21,7 +21,7 @@ public class User: IEntity<Guid>
     [Column("Id")]
     public Guid Id { get; protected set; }
     [Column("UserName")]
-    public string UserName { get; protected set; }
+    public string UserName { get; set; }
     [Column("Login")]
     public string Login { get; protected set; }
     [Column("PasswordHash")]
@@ -29,7 +29,7 @@ public class User: IEntity<Guid>
     [Column("CreatedAt")]
     public DateTime CreatedAt { get; protected set; }
     [Column("IsAuthBlocked")]
-    public bool IsAuthBlocked { get; protected set; }
+    public bool IsAuthBlocked { get; set; }
     [Column("BlockedTill")]
-    public DateTime BlockedTill { get; protected set; }
+    public DateTime BlockedTill { get; set; }
 }

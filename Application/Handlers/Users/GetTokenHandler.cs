@@ -30,7 +30,7 @@ public class GetTokenHandler: IRequestHandler<Query, Response>
 
         var tokenEntity = await _context
             .Tokens
-            .FindByTokenAndUserId(userId, token);
+            .FindByTokenAndUserIdAsync(userId, token);
 
         if (tokenEntity == null)
         {

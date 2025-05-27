@@ -45,11 +45,19 @@ builder.Services.AddAuthentication("Bearer")
 
 var app = builder.Build().Configure(webAppConfiguration);
 
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/openapi.yaml", "VibeNote");
+    c.RoutePrefix = "swagger";
+});
+
 if (app.Environment.IsDevelopment())
 {
     await using var scope = app.Services.CreateAsyncScope();
     var serviceProvider = scope.ServiceProvider;
     await serviceProvider.UseDatabaseContext();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.Logger.LogInformation("Starting the application");

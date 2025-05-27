@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Application.Abstractions.User;
 using Common.Exceptions.UnauthorizedExceptions;
 using Contracts.Users.Queries;
 using Mediator;
@@ -10,15 +11,15 @@ namespace WebApp.Tools;
 public class TokenValidationMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly IMediator _mediator;
+    private readonly IUserService _userService;
 
-    public TokenValidationMiddleware(RequestDelegate next, IMediator mediator)
+    public TokenValidationMiddleware(RequestDelegate next, IUserService userService)
     {
         _next = next;
-        _mediator = mediator;
+        _userService = userService;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, CancellationToken cancellationToken)
     {
         var authHeader = context.Request.Headers.Authorization.ToString();
 
@@ -41,7 +42,7 @@ public class TokenValidationMiddleware
                 var userId = Guid.Parse(userIdString);
                 
                 
-                await _mediator.Send(new GetToken.Query(userId, token));
+                await _userService.GetToken(userId, token, cancellationToken);
 
                 await _next(context);
             }

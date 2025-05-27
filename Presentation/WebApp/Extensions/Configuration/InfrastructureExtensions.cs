@@ -1,4 +1,5 @@
 ﻿using DataAccess.Extensions;
+using Identity.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Configuration;
@@ -16,6 +17,12 @@ public static class InfrastructureExtensions
                 configuration.PostgreSqlConfiguration
                     .ToConnectionString()
             ));
+
+        services
+            .AddIdentityServices(
+                s => configuration.TokenInfoConfiguration.Secret,
+                s => configuration.TokenInfoConfiguration.Issuer
+                );
 
         return services;
     }

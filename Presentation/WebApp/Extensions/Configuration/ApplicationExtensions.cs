@@ -1,7 +1,6 @@
 ﻿using Handlers.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Services.Extensions;
 using WebApp.Configuration;
 
 namespace WebApp.Extensions.Configuration;
@@ -16,8 +15,6 @@ public static class ApplicationExtensions
     {
         services.AddLogging(o => o
             .AddSimpleConsole(c => c.TimestampFormat = LoggingTimestampFormat));
-
-        services.AddApplicationConfiguration();
 
         services.AddHandlers();
 

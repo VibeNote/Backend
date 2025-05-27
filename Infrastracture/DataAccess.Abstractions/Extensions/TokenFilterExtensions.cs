@@ -14,7 +14,7 @@ public static class TokenFilterExtensions
         return tokens.Where(filterExpression);
     }
     
-    public static Task<Token?> FindByTokenAndUserId(this DbSet<Token> tokens, Guid userId, string value)
+    public static Task<Token?> FindByTokenAndUserIdAsync(this DbSet<Token> tokens, Guid userId, string value)
     {
         Expression<Func<Token, bool>> filterExpression =
             token => token.UserId == userId && token.Value == value;

@@ -10,4 +10,9 @@
       <Folder Include="obj\Debug\net8.0\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Domain\Core\Core.csproj" />
+      <ProjectReference Include="..\Dto\Dto.csproj" />
+    </ItemGroup>
+
 </Project>

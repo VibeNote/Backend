@@ -38,14 +38,16 @@
       <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.11.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Application\Application.Abstractions\Application.Abstractions.csproj" />
       <ProjectReference Include="..\..\Application\Contracts\Contracts.csproj" />
       <ProjectReference Include="..\..\Application\Handlers\Handlers.csproj" />
-      <ProjectReference Include="..\..\Application\Services\Services.csproj" />
       <ProjectReference Include="..\..\Infrastracture\DataAccess\DataAccess.csproj" />
+      <ProjectReference Include="..\..\Infrastracture\Identity\Identity.csproj" />
       <ProjectReference Include="..\WebApp.Abstractions\WebApp.Abstractions.csproj" />
     </ItemGroup>
 

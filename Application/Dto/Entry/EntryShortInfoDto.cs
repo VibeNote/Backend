@@ -7,4 +7,4 @@ public record EntryShortInfoDto(
     string Content,
     DateTime CreatedAt,
     DateTime UpdatedAt,
-    IReadOnlyCollection<AnalysisTagInfoDto> Tags);
+    IReadOnlyCollection<AnalysisTagInfoDto>? Tags);

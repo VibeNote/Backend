@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using WebApp.Configuration;
 
 namespace WebApp.Extensions.Configuration;
@@ -10,7 +11,7 @@ public static class RegistrationExtensions
         this IServiceCollection services,
         WebAppConfiguration configuration)
     {
-        
+
         services
             .ConfigureInfrastructure(configuration)
             .ConfigureApplication(configuration)
