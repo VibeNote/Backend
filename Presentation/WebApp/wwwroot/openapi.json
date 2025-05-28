@@ -137,7 +137,7 @@
         },
         "security": [
           {
-            "access_token": []
+            "Authorization": []
           }
         ]
       }
@@ -184,7 +184,7 @@
         },
         "security": [
           {
-            "access_token": []
+            "Authorization": []
           }
         ]
       },
@@ -218,7 +218,7 @@
         },
         "security": [
           {
-            "access_token": []
+            "Authorization": []
           }
         ]
       }
@@ -257,7 +257,7 @@
         },
         "security": [
           {
-            "access_token": []
+            "Authorization": []
           }
         ]
       },
@@ -302,7 +302,7 @@
         },
         "security": [
           {
-            "access_token": []
+            "Authorization": []
           }
         ]
       }
@@ -350,7 +350,7 @@
         },
         "security": [
           {
-            "access_token": []
+            "Authorization": []
           }
         ]
       }
@@ -398,7 +398,7 @@
         },
         "security": [
           {
-            "access_token": []
+            "Authorization": []
           }
         ]
       }
@@ -727,9 +727,9 @@
       }
     },
     "securitySchemes": {
-      "access_token": {
+      "Authorization": {
         "type": "apiKey",
-        "name": "access_token",
+        "name": "Authorization",
         "in": "header"
       }
     }

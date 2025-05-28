@@ -31,4 +31,15 @@ public static class DbSetExtensions
 
         return entity;
     }
+    
+    public static TEntity? FindById<TEntity, TKey>(
+        this DbSet<TEntity> dbSet,
+        TKey key)
+        where TEntity : class
+        where TKey : IEquatable<TKey>
+    {
+        var entity = dbSet.Find([key]);
+
+        return entity;
+    }
 }

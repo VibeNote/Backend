@@ -105,4 +105,10 @@ public class UserService: IUserService
 
         return new TokenDto(tokenEntity.Value, user.UserName);
     }
+
+    public bool IsExists(Guid userId)
+    {
+        var user = _context.Users.FindById(userId);
+        return user != null;
+    }
 }

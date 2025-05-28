@@ -9,4 +9,5 @@ public interface IUserService
     Task<TokenDto> Register(RegisterUserDto registerUser, CancellationToken cancellationToken);
     Task Logout(Guid userId, string token, CancellationToken cancellationToken);
     Task<TokenDto> GetToken(Guid userId, string token, CancellationToken cancellationToken);
+    bool IsExists(Guid userId);
 }
