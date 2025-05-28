@@ -1,3 +1,5 @@
+using Application.Abstractions.User;
+
 namespace Identity.Services;
 
 using System.IdentityModel.Tokens.Jwt;
@@ -5,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-public class TokenGenerator
+public class TokenGenerator: ITokenGenerator
 {
     private readonly string _key;
     private readonly string _issuer;
@@ -16,13 +18,13 @@ public class TokenGenerator
         _issuer = issuer;
     }
 
-    public string GenerateToken(string userId)
+    public string GenerateToken(Guid userId)
     {
         var key = Encoding.UTF8.GetBytes(_key);
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, userId),
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
         };
 
         var creds = new SigningCredentials(

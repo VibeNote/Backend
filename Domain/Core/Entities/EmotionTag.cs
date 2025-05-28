@@ -5,10 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Common.Exceptions.InternalServerExceptions.Domain.Operation;
 using Core.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Entities;
 
 [Table("EmotionTagTable")]
+[PrimaryKey(nameof(Id))]
 public class EmotionTag: IEntity<Guid>
 {
     

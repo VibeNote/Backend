@@ -9,6 +9,7 @@ public class WebAppConfiguration
     public WebAppConfiguration(IConfiguration configuration)
     {
         PostgreSqlConfiguration = configuration.GetSection<PostgreSqlConfiguration>();
+        TokenInfoConfiguration = configuration.GetSection<TokenInfoConfiguration>();
     }
     public PostgreSqlConfiguration PostgreSqlConfiguration { get; }
     public TokenInfoConfiguration TokenInfoConfiguration { get; }

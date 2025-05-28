@@ -33,7 +33,7 @@ public static class StartupExtensions
         
         app.MapControllers();
 
-        string corsOrigin = app.Configuration.GetConnectionString("CorsOrigin")!;
+        var corsOrigin = app.Configuration.GetConnectionString("CorsOrigin")!;
         app.UseCors(o => o.WithOrigins(corsOrigin));
 
         return app;

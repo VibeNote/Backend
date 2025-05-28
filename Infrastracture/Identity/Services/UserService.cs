@@ -15,13 +15,13 @@ public class UserService: IUserService
 {
     private readonly IVibeNoteDatabaseContext _context;
     private readonly ITokenGenerator _tokenGenerator;
-    private readonly IPasswordHasherWrapper _passwordHasherWrapper;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public UserService(IVibeNoteDatabaseContext context, ITokenGenerator tokenGenerator, IPasswordHasherWrapper passwordHasherWrapper)
+    public UserService(IVibeNoteDatabaseContext context, ITokenGenerator tokenGenerator, IPasswordHasher passwordHasher)
     {
         _context = context;
         _tokenGenerator = tokenGenerator;
-        _passwordHasherWrapper = passwordHasherWrapper;
+        _passwordHasher = passwordHasher;
     }
     
     public async Task<TokenDto> Login(CredentialsDto credentials, CancellationToken cancellationToken)
@@ -32,7 +32,7 @@ public class UserService: IUserService
             throw UserNotFoundException.InvalidLogin();
         }
 
-        var passwordHash = _passwordHasherWrapper.GenerateHash(credentials.Password);
+        var passwordHash = _passwordHasher.GenerateHash(credentials.Password);
         if (user.PasswordHash != passwordHash)
         {
             UserServiceException.InvalidCredentials();
@@ -54,7 +54,7 @@ public class UserService: IUserService
             throw UserServiceException.UserNameIsNotUnique(registerUser.Credentials.Login);
         }
 
-        var passwordHash = _passwordHasherWrapper.GenerateHash(registerUser.Credentials.Password);
+        var passwordHash = _passwordHasher.GenerateHash(registerUser.Credentials.Password);
         user = new User(
             Guid.NewGuid(), 
             registerUser.Username, 

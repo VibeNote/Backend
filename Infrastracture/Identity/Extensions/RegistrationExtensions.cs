@@ -1,3 +1,4 @@
+using Application.Abstractions.User;
 using Core.Entities;
 using Identity.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,9 +13,9 @@ public static class RegistrationExtensions
         Func<IServiceProvider, string> getIssuer)
     {
         services
-            .AddScoped<PasswordHasherWrapper>()
-            .AddScoped(s => new TokenGenerator(getSecret(s), getIssuer(s)))
-            .AddScoped<UserService>();
+            .AddScoped<IPasswordHasher, PasswordHasher>()
+            .AddScoped<ITokenGenerator, TokenGenerator>(s => new TokenGenerator(getSecret(s), getIssuer(s)))
+            .AddScoped<IUserService, UserService>();
 
         return services;
     }

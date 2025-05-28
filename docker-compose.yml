@@ -1,6 +1,28 @@
-﻿services:
-  application:
-    image: application
+﻿version: '3.8'
+
+services:
+  webapi:
     build:
       context: .
-      dockerfile: Application/Dockerfile
+      dockerfile: Presentation/WebApp/Dockerfile
+    ports:
+      - "5000:80"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${PostgreSqlConfiguration__DatabaseName}
+      POSTGRES_USER: ${PostgreSqlConfiguration__Username}
+      POSTGRES_PASSWORD: ${PostgreSqlConfiguration__Password}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

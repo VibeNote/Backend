@@ -3,13 +3,8 @@ using Application.Abstractions.User;
 
 namespace Identity.Services;
 
-public class PasswordHasherWrapper: IPasswordHasherWrapper
+public class PasswordHasher: IPasswordHasher
 {
-
-    public PasswordHasherWrapper()
-    {
-    }
-
     public string GenerateHash(string password)
     {
         var salt = RandomNumberGenerator.GetBytes(16);

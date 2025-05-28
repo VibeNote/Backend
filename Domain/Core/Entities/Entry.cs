@@ -2,10 +2,12 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Core.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Entities;
 
 [Table("EntryTable")]
+[PrimaryKey(nameof(Id))]
 public class Entry: IEntity<Guid>
 {
     public Entry(Guid id, Guid userId, string content, DateTime createdAt, DateTime updatedAt)
@@ -15,6 +17,9 @@ public class Entry: IEntity<Guid>
         Content = content;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
+    }
+    protected Entry() : this(Guid.Empty, Guid.Empty, string.Empty, DateTime.Now, DateTime.Now)
+    {
     }
     [Key, Column("Id")]
     public Guid Id { get; }

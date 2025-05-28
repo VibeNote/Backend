@@ -1,10 +1,13 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Core.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Entities;
 
 [Table("UserTable")]
+[PrimaryKey(nameof(Id))]
 public class User: IEntity<Guid>
 {
     public User(Guid id, string userName, string login, string passwordHash, DateTime createdAt)
@@ -18,11 +21,11 @@ public class User: IEntity<Guid>
         BlockedTill = DateTime.Now;
     }
 
-    [Column("Id")]
+    [Key, Column("Id")]
     public Guid Id { get; protected set; }
     [Column("UserName")]
     public string UserName { get; set; }
-    [Column("Login")]
+    [Key, Column("Login")]
     public string Login { get; protected set; }
     [Column("PasswordHash")]
     public string PasswordHash { get; protected set; }
