@@ -20,6 +20,8 @@
         <None Update="appsettings.Development.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+        <None Update="wwwroot">
+        </None>
     </ItemGroup>
 
 
@@ -37,6 +39,7 @@
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.3.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.3.0" />
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.2" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
@@ -50,7 +53,9 @@
       <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.0.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.0.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.0.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.11.0" />
     </ItemGroup>
 

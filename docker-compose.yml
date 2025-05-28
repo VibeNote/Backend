@@ -6,9 +6,12 @@ services:
       context: .
       dockerfile: Presentation/WebApp/Dockerfile
     ports:
-      - "5000:80"
+      - "8510:8080"
     env_file:
       - .env
+    environment:
+      - ConnectionStrings__Default=Host=${PostgreSqlConfiguration__Host};Port=${PostgreSqlConfiguration__Port};Database=${PostgreSqlConfiguration__DatabaseName};Username=${PostgreSqlConfiguration__Username};Password=${PostgreSqlConfiguration__Password}
+      - Jwt__SecretKey=${TokenInfoConfiguration__Secret}
     depends_on:
       - db
 

@@ -22,33 +22,12 @@ var webAppConfiguration = new WebAppConfiguration(configuration);
 
 builder.Services.ConfigureWebApplication(webAppConfiguration);
 
-builder.Services
-    .AddMvc(options =>
-    {
-        options.MaxModelBindingCollectionSize = int.MaxValue;
-    });
-
-builder.Services.AddTransient<WebAppConfiguration>();
-
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(webAppConfiguration.TokenInfoConfiguration.Secret)),
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = false
-        };
-    });
-
 var app = builder.Build().Configure(webAppConfiguration);
 
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/openapi.yaml", "VibeNote");
-    c.RoutePrefix = "swagger";
+    c.SwaggerEndpoint("/openapi.json", "VibeNote");
+    c.RoutePrefix = string.Empty;
 });
 
 if (app.Environment.IsDevelopment())
@@ -56,8 +35,6 @@ if (app.Environment.IsDevelopment())
     await using var scope = app.Services.CreateAsyncScope();
     var serviceProvider = scope.ServiceProvider;
     await serviceProvider.UseDatabaseContext();
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.Logger.LogInformation("Starting the application");

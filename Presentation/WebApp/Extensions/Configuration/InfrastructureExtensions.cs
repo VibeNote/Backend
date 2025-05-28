@@ -15,7 +15,7 @@ public static class InfrastructureExtensions
         services.AddDatabaseContext(o => o
             .UseNpgsql(
                 configuration.PostgreSqlConfiguration
-                    .ToConnectionString()
+                    .ToConnectionString(configuration.ContainerNamesConfiguration.Postgres)
             ));
 
         services

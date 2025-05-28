@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
+using System.Text;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebApp.Configuration;
 
@@ -16,7 +18,26 @@ public static class RegistrationExtensions
             .ConfigureInfrastructure(configuration)
             .ConfigureApplication(configuration)
             .ConfigurePresentation();
-
+        
+        services
+            .AddMvc(options =>
+            {
+                options.MaxModelBindingCollectionSize = int.MaxValue;
+            });
+        services.AddTransient<WebAppConfiguration>();
+        services.AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.TokenInfoConfiguration.Secret)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false
+                };
+            });
+        
         return services;
     }
 }

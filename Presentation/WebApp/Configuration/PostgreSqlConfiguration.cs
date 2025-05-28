@@ -11,7 +11,10 @@ public class PostgreSqlConfiguration
     public required string Password { get; init; }
     public required string DatabaseName { get; init; }
 
-    public string ToConnectionString()
+    public string ToConnectionString(string containerName)
+    {
+        return $"Host={containerName};Port={Port};Database={DatabaseName};Username={Username};Password={Password};{Polling}";
+    }    public string ToConnectionString()
     {
         return $"Host={Host};Port={Port};Database={DatabaseName};Username={Username};Password={Password};{Polling}";
     }
