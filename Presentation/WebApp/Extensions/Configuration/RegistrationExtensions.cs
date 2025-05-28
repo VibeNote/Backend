@@ -1,8 +1,6 @@
-﻿using System.Globalization;
-using System.Text;
+﻿using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using WebApp.Configuration;
 
 namespace WebApp.Extensions.Configuration;

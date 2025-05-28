@@ -1,4 +1,3 @@
-using System;
 using Common.Exceptions.ForbiddenExceptions.Abstractions;
 
 namespace Common.Exceptions.ForbiddenExceptions;

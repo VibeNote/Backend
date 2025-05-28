@@ -1,5 +1,4 @@
-﻿using Common.Exceptions.UnauthorizedExceptions;
-using Mediator;
+﻿using Mediator;
 using Contracts.Users.Queries;
 using DataAccess.Abstractions;
 using DataAccess.Abstractions.Extensions;

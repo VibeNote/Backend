@@ -1,12 +1,10 @@
-﻿using System.Text;
-using DataAccess.Extensions;
+﻿using DataAccess.Extensions;
 using DotNetEnv;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using WebApp.Configuration;
 using WebApp.Extensions;
 using WebApp.Extensions.Configuration;

@@ -1,5 +1,4 @@
 using Application.Abstractions.User;
-using Core.Entities;
 using Identity.Services;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,5 +1,4 @@
 using Dto.Common;
-using Dto.User;
 using Mediator;
 
 namespace Contracts.Users.Queries;

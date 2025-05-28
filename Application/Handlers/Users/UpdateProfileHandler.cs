@@ -1,5 +1,4 @@
-﻿using Application.Abstractions.User;
-using Contracts.Users.Commands;
+﻿using Contracts.Users.Commands;
 using DataAccess.Abstractions;
 using DataAccess.Abstractions.Extensions;
 using Dto.User;

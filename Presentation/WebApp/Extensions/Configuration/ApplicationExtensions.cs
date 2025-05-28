@@ -1,4 +1,5 @@
-﻿using Handlers.Extensions;
+﻿using Application.Extensions;
+using Handlers.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebApp.Configuration;
@@ -17,6 +18,7 @@ public static class ApplicationExtensions
             .AddSimpleConsole(c => c.TimestampFormat = LoggingTimestampFormat));
 
         services.AddHandlers();
+        services.AddRussianServices();
 
         return services;
     }

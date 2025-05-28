@@ -1,5 +1,3 @@
-using System;
-
 namespace Dto.Tag;
 
 public record TagDto(

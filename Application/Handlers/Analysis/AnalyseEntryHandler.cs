@@ -1,6 +1,5 @@
 using Contracts.Analysis.Commands;
 using DataAccess.Abstractions;
-using Dto.User;
 using Mediator;
 
 namespace Handlers.Analysis;

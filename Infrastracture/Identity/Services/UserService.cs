@@ -1,6 +1,6 @@
+using Application.Abstractions.Providers;
 using Application.Abstractions.User;
 using Common.Exceptions.BadRequestExceptions.User;
-using Common.Exceptions.NotFoundExceptions.Entity;
 using Common.Exceptions.NotFoundExceptions.User;
 using Common.Exceptions.UnauthorizedExceptions;
 using Core.Entities;
@@ -16,12 +16,14 @@ public class UserService: IUserService
     private readonly IVibeNoteDatabaseContext _context;
     private readonly ITokenGenerator _tokenGenerator;
     private readonly IPasswordHasher _passwordHasher;
+    private readonly IDateTimeProvider _dateTimeProvider;
 
-    public UserService(IVibeNoteDatabaseContext context, ITokenGenerator tokenGenerator, IPasswordHasher passwordHasher)
+    public UserService(IVibeNoteDatabaseContext context, ITokenGenerator tokenGenerator, IPasswordHasher passwordHasher, IDateTimeProvider dateTimeProvider)
     {
         _context = context;
         _tokenGenerator = tokenGenerator;
         _passwordHasher = passwordHasher;
+        _dateTimeProvider = dateTimeProvider;
     }
     
     public async Task<TokenDto> Login(CredentialsDto credentials, CancellationToken cancellationToken)
@@ -60,7 +62,7 @@ public class UserService: IUserService
             registerUser.Username, 
             registerUser.Credentials.Login,
             passwordHash,
-            DateTime.Now);
+            DateTime.UtcNow);
         
         var token = _tokenGenerator.GenerateToken(user.Id);
         var tokenEntity = new Token(Guid.NewGuid(), user.Id, token);

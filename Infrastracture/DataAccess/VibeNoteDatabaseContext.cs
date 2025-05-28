@@ -4,9 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess;
 
-public class VibeNoteDatabaseContext(DbContextOptions<VibeNoteDatabaseContext> options)
-    : DbContext(options), IVibeNoteDatabaseContext
+public class VibeNoteDatabaseContext
+    : DbContext, IVibeNoteDatabaseContext
 {
+    public VibeNoteDatabaseContext(DbContextOptions contextOptions): base(contextOptions)
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+    }
     public DbSet<User> Users { get; init; }
     public DbSet<Token> Tokens { get; init; }
     public DbSet<Entry> Entries { get; init; }

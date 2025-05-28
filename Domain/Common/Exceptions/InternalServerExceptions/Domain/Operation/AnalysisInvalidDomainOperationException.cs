@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Exceptions.InternalServerExceptions.Abstractions;
+﻿using Common.Exceptions.InternalServerExceptions.Abstractions;
 
 namespace Common.Exceptions.InternalServerExceptions.Domain.Operation;
 

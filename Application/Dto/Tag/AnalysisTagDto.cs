@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Dto.TriggerWord;
 
 namespace Dto.Tag;

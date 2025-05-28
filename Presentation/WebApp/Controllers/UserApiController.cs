@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Contracts.Users.Commands;
+﻿using Contracts.Users.Commands;
 using Contracts.Users.Queries;
 using Dto.User;
 using Mediator;

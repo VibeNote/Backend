@@ -1,5 +1,4 @@
-﻿using DataAccess.EntityConfiguration;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using WebApp.Extensions.Configuration;
 
 namespace WebApp.Configuration;
