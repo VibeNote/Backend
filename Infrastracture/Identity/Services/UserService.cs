@@ -33,11 +33,10 @@ public class UserService: IUserService
         {
             throw UserNotFoundException.InvalidLogin();
         }
-
-        var passwordHash = _passwordHasher.GenerateHash(credentials.Password);
-        if (user.PasswordHash != passwordHash)
+        
+        if (!_passwordHasher.VerifyPassword(user.PasswordHash, credentials.Password))
         {
-            UserServiceException.InvalidCredentials();
+            throw UserServiceException.InvalidCredentials();
         }
 
         var token = _tokenGenerator.GenerateToken(user.Id);
