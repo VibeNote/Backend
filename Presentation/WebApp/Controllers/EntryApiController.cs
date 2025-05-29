@@ -34,7 +34,7 @@ public class EntryApiController: ControllerBase, IEntryApiController
     
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> Save(SaveEntryModel saveEntryModel, CancellationToken cancellationToken)
+    public async Task<IActionResult> Save([FromBody] SaveEntryModel saveEntryModel, CancellationToken cancellationToken)
     {
         var userId = User.GetId();
         
@@ -47,7 +47,7 @@ public class EntryApiController: ControllerBase, IEntryApiController
     
     [HttpGet("{id}")]
     [Authorize]
-    public async Task<IActionResult> GetFullInfo(Guid entryId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetFullInfo([FromRoute] Guid entryId, CancellationToken cancellationToken)
     {
         var userId = User.GetId();
 

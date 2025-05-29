@@ -22,7 +22,7 @@ public class UserApiController : ControllerBase, IUserApiController
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(UserCredentialsModel credentialsModel, CancellationToken cancellationToken)
+    public async Task<IActionResult> Login([FromBody] UserCredentialsModel credentialsModel, CancellationToken cancellationToken)
     {
         var tokenResponse = await _mediator.Send(new LoginUser.Command(
                 new CredentialsDto(
@@ -34,7 +34,7 @@ public class UserApiController : ControllerBase, IUserApiController
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterUserModel registerModel, CancellationToken cancellationToken)
+    public async Task<IActionResult> Register([FromBody] RegisterUserModel registerModel, CancellationToken cancellationToken)
     {
         var tokenResponse = await _mediator.Send(new RegisterUser.Command(
                 new RegisterUserDto(
@@ -61,7 +61,7 @@ public class UserApiController : ControllerBase, IUserApiController
 
     [HttpPut]
     [Authorize]
-    public async Task<IActionResult> Update(UpdateUserModel updateModel, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromBody] UpdateUserModel updateModel, CancellationToken cancellationToken)
     {
         var userId = User.GetId();
 

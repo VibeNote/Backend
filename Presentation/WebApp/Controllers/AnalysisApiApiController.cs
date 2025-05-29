@@ -21,7 +21,7 @@ public class AnalysisApiApiController : ControllerBase, IAnalysisApiController
     
     [HttpPost("{id}")]
     [Authorize]
-    public async Task<IActionResult> AnalyseById(Guid entryId, CancellationToken cancellationToken)
+    public async Task<IActionResult> AnalyseById([FromRoute] Guid entryId, CancellationToken cancellationToken)
     {
         var userId = User.GetId();
 
