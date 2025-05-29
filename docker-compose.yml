@@ -5,11 +5,7 @@ services:
     build:
       context: .
       dockerfile: Presentation/WebApp/Dockerfile
-      target: build
-    command: [ ]
-    entrypoint:
-      - "dotnet"
-      - "/app/bin/VibeNote/net8.0/WebApp.dll"
+      target: runtime
     ports:
       - "8511:8080"
     env_file:
@@ -21,10 +17,6 @@ services:
       Jwt__SecretKey: ${TokenInfoConfiguration__Secret}
     depends_on:
       - db
-    volumes:
-      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages:ro
-      - ./Presentation/WebApp:/app:rw
-      - .:/src:rw
     working_dir: /app
 
   db:
