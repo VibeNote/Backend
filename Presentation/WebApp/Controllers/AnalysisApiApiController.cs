@@ -19,7 +19,7 @@ public class AnalysisApiApiController : ControllerBase, IAnalysisApiController
     }
 
     
-    [HttpPost("{id}")]
+    [HttpPost("{entryId}")]
     [Authorize]
     public async Task<IActionResult> AnalyseById([FromRoute] Guid entryId, CancellationToken cancellationToken)
     {

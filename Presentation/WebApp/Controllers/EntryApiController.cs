@@ -45,7 +45,7 @@ public class EntryApiController: ControllerBase, IEntryApiController
     }
 
     
-    [HttpGet("{id}")]
+    [HttpGet("{entryId}")]
     [Authorize]
     public async Task<IActionResult> GetFullInfo([FromRoute] Guid entryId, CancellationToken cancellationToken)
     {
