@@ -5,15 +5,27 @@ services:
     build:
       context: .
       dockerfile: Presentation/WebApp/Dockerfile
+      target: build
+    command: [ ]
+    entrypoint:
+      - "dotnet"
+      - "/app/bin/VibeNote/net8.0/WebApp.dll"
     ports:
-      - "8510:8080"
+      - "8511:8080"
     env_file:
       - .env
     environment:
-      - ConnectionStrings__Default=Host=${PostgreSqlConfiguration__Host};Port=${PostgreSqlConfiguration__Port};Database=${PostgreSqlConfiguration__DatabaseName};Username=${PostgreSqlConfiguration__Username};Password=${PostgreSqlConfiguration__Password}
-      - Jwt__SecretKey=${TokenInfoConfiguration__Secret}
+      DOTNET_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      ConnectionStrings__Default: Host=${PostgreSqlConfiguration__Host};Port=${PostgreSqlConfiguration__Port};Database=${PostgreSqlConfiguration__DatabaseName};Username=${PostgreSqlConfiguration__Username};Password=${PostgreSqlConfiguration__Password}
+      Jwt__SecretKey: ${TokenInfoConfiguration__Secret}
     depends_on:
       - db
+    volumes:
+      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages:ro
+      - ./Presentation/WebApp:/app:rw
+      - .:/src:rw
+    working_dir: /app
 
   db:
     image: postgres:15
