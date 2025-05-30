@@ -12,6 +12,6 @@ public class AnalysisInvalidDomainOperationException : InvalidDomainOperationExc
         Guid analysisId,
         Guid emotionTagId)
         => new AnalysisInvalidDomainOperationException(
-            $"Analysis with id {analysisId} already has emotion tag with id {emotionTagId}"
+            $"Анализ с идентификатором {analysisId} уже имеет тег {emotionTagId}"
         );
 }

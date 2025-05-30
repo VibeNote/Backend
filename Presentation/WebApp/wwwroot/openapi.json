@@ -353,6 +353,91 @@
             "Authorization": []
           }
         ]
+      },
+      "put": {
+        "tags": [
+          "Entry"
+        ],
+        "summary": "Update entry full information",
+        "operationId": "updateEntry",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Entry id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "GUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entry was updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Entry"
+        ],
+        "summary": "Delete entry",
+        "operationId": "deleteEntry",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Entry id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "GUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entry was deleted"
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     },
     "/analysis/{entryId}": {

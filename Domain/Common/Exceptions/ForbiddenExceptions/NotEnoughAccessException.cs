@@ -10,11 +10,11 @@ public class NotEnoughAccessException : ForbiddenException
 
     public static NotEnoughAccessException UserCannotInteractWithEntry(Guid userId, Guid entryId)
         => new NotEnoughAccessException(
-            $"User with id {userId} cannot interact with entry with id {entryId}"
+            $"Пользователь {userId} не может взаимодейстовать с записью {entryId}"
         );
 
     public static NotEnoughAccessException UserBlocked(Guid userId)
         => new NotEnoughAccessException(
-            $"User with id {userId} is blocked"
+            $"Пользователь {userId} заблокирован"
         );
 }

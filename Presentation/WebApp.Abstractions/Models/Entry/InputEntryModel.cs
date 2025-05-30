@@ -3,7 +3,7 @@ using WebApp.Abstractions.Attributes.Validation;
 
 namespace WebApp.Abstractions.Models.Entry;
 
-public class SaveEntryModel
+public class InputEntryModel
 {
     [Required(ErrorMessage = ErrorMessages.Required)]
     [Display(Name = "Запись")]

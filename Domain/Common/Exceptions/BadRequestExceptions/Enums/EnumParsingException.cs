@@ -10,6 +10,6 @@ public class EnumParsingException: BadRequestException
 
     public static EnumParsingException CannotParseEnum<TEnum>(string value)
         => new EnumParsingException(
-            $"Invalid value {value} to parse {typeof(TEnum)}"
+            $"Неподдерживаемое значение {value} для получения {typeof(TEnum)}"
         );
 }

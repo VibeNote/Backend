@@ -34,17 +34,42 @@ public class EntryApiController: ControllerBase, IEntryApiController
     
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> Save([FromBody] SaveEntryModel saveEntryModel, CancellationToken cancellationToken)
+    public async Task<IActionResult> Save([FromBody] InputEntryModel inputEntryModel, CancellationToken cancellationToken)
     {
         var userId = User.GetId();
         
         
-        var saveResponse = await _mediator.Send(new SaveEntry.Command(userId, new InputEntryDto(saveEntryModel.Content)), cancellationToken);
+        var saveResponse = await _mediator.Send(new SaveEntry.Command(userId, new InputEntryDto(inputEntryModel.Content)), cancellationToken);
 
         return Ok(saveResponse.Entry);
     }
 
-    
+    [HttpPut("{entryId}")]
+    [Authorize]
+    public async Task<IActionResult> Update(Guid entryId, InputEntryModel inputEntryModel, CancellationToken cancellationToken)
+    {
+        var userId = User.GetId();
+
+        var updateResponse =
+            await _mediator.Send(new UpdateEntry.Command(userId, new UpdateEntryDto(entryId, inputEntryModel.Content)),
+                cancellationToken);
+        
+        return Ok(updateResponse.Entry);
+    }
+
+    [HttpDelete("{entryId}")]
+    [Authorize]
+    public async Task<IActionResult> Delete(Guid entryId, CancellationToken cancellationToken)
+    {
+        var userId = User.GetId();
+        
+        await _mediator.Send(new DeleteEntry.Command(userId, entryId),
+                cancellationToken);
+
+        return Ok();
+    }
+
+
     [HttpGet("{entryId}")]
     [Authorize]
     public async Task<IActionResult> GetFullInfo([FromRoute] Guid entryId, CancellationToken cancellationToken)

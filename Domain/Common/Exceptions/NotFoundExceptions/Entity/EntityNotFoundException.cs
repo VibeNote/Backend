@@ -13,7 +13,7 @@ public class EntityNotFoundException : NotFoundException
         where TEntity : class
         where TId : IEquatable<TId>
     {
-        var message = $"Entity with type {typeof(TEntity).Name} and id {id} was not found";
+        var message = $"Сущности с типом {typeof(TEntity).Name} и идентификатором {id} не было найдено";
         return new EntityNotFoundException(
             message);
     }
@@ -21,7 +21,7 @@ public class EntityNotFoundException : NotFoundException
     public static EntityNotFoundException For<TEntity>(Expression<Func<TEntity, bool>> expression)
         where TEntity : class
     {
-        var message = $"Entity with type {typeof(TEntity).Name} was not found by expression {expression}";
+        var message = $"Сущности с типом {typeof(TEntity).Name} не было найдено по выражению {expression}";
         return new EntityNotFoundException(
             message);
     }
@@ -29,7 +29,7 @@ public class EntityNotFoundException : NotFoundException
     public static EntityNotFoundException For<TEntity>()
         where TEntity : class
     {
-        var message = $"Entity with type {typeof(TEntity).Name} was not found";
+        var message = $"Сущности с типом {typeof(TEntity).Name} не было найдено";
         return new EntityNotFoundException(
             message);
     }

@@ -10,6 +10,6 @@ public class TagInvalidDomainDataException : InvalidDomainDataException
 
     public static TagInvalidDomainDataException InvalidTagName(string? tagName)
         => new TagInvalidDomainDataException(
-            $"Unexpected tag name {tagName}"
+            $"Неподдерживаемое имя тега {tagName}"
         );
 }

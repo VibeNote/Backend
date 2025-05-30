@@ -1,40 +1,42 @@
 using Common.Exceptions.ForbiddenExceptions;
-using Contracts.Entry.Queries;
+using Contracts.Entry.Commands;
 using DataAccess.Abstractions;
 using DataAccess.Abstractions.Extensions;
-using Mapper.Mappers;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
 namespace Handlers.Entries;
 
-using static GetEntry;
+using static DeleteEntry;
 
-public class GetEntryHandler: IRequestHandler<Query, Response>
+public class DeleteEntryHandler
 {
     private readonly IVibeNoteDatabaseContext _context;
 
-    public GetEntryHandler(IVibeNoteDatabaseContext context)
+    public DeleteEntryHandler(IVibeNoteDatabaseContext context)
     {
         _context = context;
     }
-
-    public async ValueTask<Response> Handle(Query request, CancellationToken cancellationToken)
+    public async ValueTask<Unit> Handle(Command request, CancellationToken cancellationToken)
     {
         var entry = await _context.Entries
             .Include(e => e.Analysis)
             .ThenInclude(a => a!.EmotionTags)
-            .ThenInclude(et => et.Tag)
-            .Include(e => e.Analysis)
-            .ThenInclude(a => a!.EmotionTags)
-            .ThenInclude(et => et.TriggerWords)
             .GetByIdAsync(request.EntryId, cancellationToken);
-
         if (entry.UserId != request.UserId)
         {
             throw NotEnoughAccessException.UserCannotInteractWithEntry(request.UserId, request.EntryId);
         }
 
-        return new Response(entry.ToFullInfoDto());
+        if (entry.Analysis != null)
+        {
+            _context.EmotionTags.RemoveRange(entry.Analysis.EmotionTags);
+            _context.Analyses.Remove(entry.Analysis);
+        }
+
+        _context.Entries.Remove(entry);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return new Unit();
     }
 }

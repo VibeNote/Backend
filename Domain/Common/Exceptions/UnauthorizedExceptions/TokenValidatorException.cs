@@ -10,11 +10,11 @@ public class TokenValidatorException : UnauthorizedException
 
     public static TokenValidatorException IsUnauthorized()
         => new TokenValidatorException(
-            "Current user is unauthorized"
+            "Данный пользователь не авторизован"
         );
     
     public static TokenValidatorException InvalidToken(Guid userId, string token)
         => new TokenValidatorException(
-            $"User with id {userId} has no token {token}"
+            $"Пользователь с идентификатором {userId} не имеет токена {token}"
         );
 }

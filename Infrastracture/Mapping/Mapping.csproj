@@ -4,10 +4,12 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Mapper</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="obj\Debug\net8.0\" />
+      <ProjectReference Include="..\..\Application\Dto\Dto.csproj" />
+      <ProjectReference Include="..\..\Domain\Core\Core.csproj" />
     </ItemGroup>
 
 </Project>

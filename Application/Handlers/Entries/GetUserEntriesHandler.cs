@@ -4,6 +4,7 @@ using DataAccess.Abstractions;
 using DataAccess.Abstractions.Extensions;
 using Dto.Entry;
 using Dto.Tag;
+using Mapper.Mappers;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,18 +28,12 @@ public class GetUserEntriesHandler : IRequestHandler<Query, Response>
             .Include(e => e.Analysis)
             .ThenInclude(a => a!.EmotionTags)
             .ThenInclude(et => et.Tag)
-            .FilterByUser(request.UserId);
+            .FilterByUser(request.UserId)
+            .AsEnumerable();
 
-        return new ValueTask<Response>(new Response(entries.AsEnumerable().Select(Mapper).ToList()));
-    }
-    
-    private static EntryShortInfoDto Mapper(Entry e)
-    {
-        List<AnalysisTagInfoDto> tags;
-        tags = e.Analysis == null 
-            ? [] 
-            : e.Analysis.EmotionTags.Select(et => new AnalysisTagInfoDto(new TagDto(et.TagId, et.Tag.Value), et.Value)).ToList();
-
-        return new EntryShortInfoDto(e.Id, e.Content, e.CreatedAt, e.UpdatedAt, tags);
+        return new ValueTask<Response>(new Response(
+            entries
+                .Select(e => e.ToShortInfoDto())
+                .ToList()));
     }
 }

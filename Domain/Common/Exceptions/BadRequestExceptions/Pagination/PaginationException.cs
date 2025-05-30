@@ -11,25 +11,25 @@ public sealed class PaginationException : BadRequestException
     public static PaginationException InvalidPageNumber(int pageNumber)
     {
         return new PaginationException(
-            $"Invalid page number:{pageNumber}"
+            $"Неправильный номер страницы:{pageNumber}"
             );
     }
 
     public static PaginationException InvalidPageSize(int pageSize)
     {
         return new PaginationException(
-            $"Invalid page size: {pageSize}");
+            $"Неподдерживаемый размер страницы: {pageSize}");
     }
 
     public static PaginationException NoNextPage()
     {
         return new PaginationException(
-            "There are no next page");
+            "Нет следующей страницы");
     }
 
     public static PaginationException NoPreviousPage()
     {
         return new PaginationException(
-            "There are no previous page");
+            "Нет предыдущей страницы");
     }
 }

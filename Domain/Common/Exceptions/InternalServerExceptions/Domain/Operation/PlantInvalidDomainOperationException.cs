@@ -12,6 +12,6 @@ public class EmotionTagInvalidDomainOperationException : InvalidDomainOperationE
         Guid emotionTagId,
         Guid triggerWordId)
         => new EmotionTagInvalidDomainOperationException(
-            $"Emotion tag with id {emotionTagId} already has trigger word with id {triggerWordId}"
+            $"Тег с {emotionTagId} уже имеет ключевое слово {triggerWordId}"
         );
 }
