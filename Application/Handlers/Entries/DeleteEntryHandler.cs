@@ -9,7 +9,7 @@ namespace Handlers.Entries;
 
 using static DeleteEntry;
 
-public class DeleteEntryHandler
+public class DeleteEntryHandler: IRequestHandler<Command>
 {
     private readonly IVibeNoteDatabaseContext _context;
 

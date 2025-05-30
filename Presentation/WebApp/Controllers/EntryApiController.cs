@@ -46,7 +46,7 @@ public class EntryApiController: ControllerBase, IEntryApiController
 
     [HttpPut("{entryId}")]
     [Authorize]
-    public async Task<IActionResult> Update(Guid entryId, InputEntryModel inputEntryModel, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromRoute] Guid entryId, [FromBody] InputEntryModel inputEntryModel, CancellationToken cancellationToken)
     {
         var userId = User.GetId();
 
@@ -59,7 +59,7 @@ public class EntryApiController: ControllerBase, IEntryApiController
 
     [HttpDelete("{entryId}")]
     [Authorize]
-    public async Task<IActionResult> Delete(Guid entryId, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromRoute] Guid entryId, CancellationToken cancellationToken)
     {
         var userId = User.GetId();
         

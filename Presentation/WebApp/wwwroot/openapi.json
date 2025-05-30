@@ -360,6 +360,17 @@
         ],
         "summary": "Update entry full information",
         "operationId": "updateEntry",
+        "requestBody": {
+          "description": "Entry info",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveEntry"
+              }
+            }
+          }
+        },
         "parameters": [
           {
             "in": "path",
