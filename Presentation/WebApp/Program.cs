@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Prometheus;
 using WebApp.Configuration;
 using WebApp.Extensions;
 using WebApp.Extensions.Configuration;
@@ -21,12 +22,6 @@ var webAppConfiguration = new WebAppConfiguration(configuration);
 builder.Services.ConfigureWebApplication(webAppConfiguration);
 
 var app = builder.Build().Configure(webAppConfiguration);
-
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/openapi.json", "VibeNote");
-    c.RoutePrefix = string.Empty;
-});
 
 if (app.Environment.IsDevelopment())
 {

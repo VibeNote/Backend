@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Prometheus;
 using WebApp.Configuration;
 
 namespace WebApp.Extensions;
@@ -21,6 +22,8 @@ public static class StartupExtensions
         app.UseStaticFiles();
 
         app.UseRouting();
+        app.UseHttpMetrics();
+        app.MapMetrics();
 
         app.UseAuthentication();
         app.UseAuthorization();
@@ -29,9 +32,14 @@ public static class StartupExtensions
         /*app.MapControllerRoute(
             name: "default",
             pattern: "{controller}/{action=PriceLists}/{id?}");*/
-        app.MapRazorPages();
         
         app.MapControllers();
+        
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/openapi.json", "VibeNote");
+            c.RoutePrefix = string.Empty;
+        });
 
         var corsOrigin = app.Configuration.GetConnectionString("CorsOrigin")!;
         app.UseCors(o => o.WithOrigins(corsOrigin));
