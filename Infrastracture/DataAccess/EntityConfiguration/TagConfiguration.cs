@@ -1,3 +1,5 @@
+using Common.Enums;
+using Common.Extentions;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -18,12 +20,12 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
         builder.HasData(
             new[]
             {
-                new Tag(Guid.Parse(JoyId), "Радость"),
-                new Tag(Guid.Parse(CalmnessId), "Спокойствие"),
-                new Tag(Guid.Parse(AngerId), "Злость"),
-                new Tag(Guid.Parse(SadnessId), "Печаль"),
-                new Tag(Guid.Parse(AnxietyId), "Тревога"),
-                new Tag(Guid.Parse(ConfusionId), "Растерянность")
+                new Tag(Guid.Parse(JoyId), TagsEnum.Joy, TagsEnum.Joy.ToRuName(), TagsEnum.Joy.ToEngName()),
+                new Tag(Guid.Parse(CalmnessId), TagsEnum.Calmness, TagsEnum.Calmness.ToRuName(), TagsEnum.Calmness.ToEngName()),
+                new Tag(Guid.Parse(AngerId), TagsEnum.Anger, TagsEnum.Anger.ToRuName(), TagsEnum.Anger.ToEngName()),
+                new Tag(Guid.Parse(SadnessId), TagsEnum.Sadness, TagsEnum.Sadness.ToRuName(), TagsEnum.Sadness.ToEngName()),
+                new Tag(Guid.Parse(AnxietyId), TagsEnum.Anxiety, TagsEnum.Anxiety.ToRuName(), TagsEnum.Anxiety.ToEngName()),
+                new Tag(Guid.Parse(ConfusionId), TagsEnum.Confusion, TagsEnum.Confusion.ToRuName(), TagsEnum.Confusion.ToEngName())
             });
     }
 }

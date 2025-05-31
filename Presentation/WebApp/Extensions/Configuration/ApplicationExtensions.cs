@@ -17,8 +17,13 @@ public static class ApplicationExtensions
         services.AddLogging(o => o
             .AddSimpleConsole(c => c.TimestampFormat = LoggingTimestampFormat));
 
-        services.AddHandlers();
-        services.AddRussianServices();
+        services
+            .AddHandlers()
+            .AddProviders()
+            .AddAnalysisService(
+                s => new Uri($"http://{configuration.ContainersConfiguration.EmotionsName}:{configuration.ContainersConfiguration.EmotionsPort}"),
+                s => new Uri($"http://{configuration.ContainersConfiguration.RecommendationsName}:{configuration.ContainersConfiguration.RecommendationsPort}")
+            );
 
         return services;
     }

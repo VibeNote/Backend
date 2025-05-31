@@ -1,6 +1,12 @@
 ﻿version: '3.8'
 
 services:
+  models-base:
+    build:
+      context: .
+      dockerfile: ./models/shared/Dockerfile
+    image: models-base
+
   webapi:
     build:
       context: .
@@ -17,6 +23,8 @@ services:
       Jwt__SecretKey: ${TokenInfoConfiguration__Secret}
     depends_on:
       - db
+      - emotion-server
+      - recommendation-server
     working_dir: /app
 
   db:
@@ -31,5 +39,42 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  emotion-server:
+    build:
+      context: ./models/emotion-server
+      args:
+        HF_TOKEN: ${HF_TOKEN}
+    ports:
+      - "5000:5000"
+    volumes:
+      - transformers_cache:/root/.cache/huggingface
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 1m
+      timeout: 10s
+      retries: 5
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+    depends_on:
+      - models-base
+
+  recommendation-server:
+    build:
+      context: ./models/recommendation-server
+      args:
+        HF_TOKEN: ${HF_TOKEN}
+    ports:
+      - "5001:5001"
+    volumes:
+      - transformers_cache:/root/.cache/huggingface
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 1m
+      timeout: 10s
+      retries: 5
+    depends_on:
+      - models-base
+
 volumes:
   pgdata:
+  transformers_cache:

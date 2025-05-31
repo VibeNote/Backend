@@ -12,4 +12,14 @@ public class EnumParsingException: BadRequestException
         => new EnumParsingException(
             $"Неподдерживаемое значение {value} для получения {typeof(TEnum)}"
         );
+    
+    public static EnumParsingException CannotParseEnum<TEnum>(int value)
+        => new EnumParsingException(
+            $"Неподдерживаемое значение {value} для получения {typeof(TEnum)}"
+        );
+
+    public static Exception CannotParseEnum<TEnum>(TEnum tagsEnum)
+        => new EnumParsingException(
+        $"Неподдерживаемое значение {tagsEnum?.ToString()} для получения {typeof(TEnum)}"
+    );
 }

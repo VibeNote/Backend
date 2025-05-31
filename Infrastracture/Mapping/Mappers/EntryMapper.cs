@@ -19,7 +19,7 @@ public static class EntryMapper
                         et => new AnalysisTagDto(
                             new TagDto(
                                 et.TagId, 
-                                et.Tag.Value), 
+                                et.Tag.RuName), 
                             et.Value, 
                             et.TriggerWords.Select(tw => 
                                 new TriggerWordDto(
@@ -35,7 +35,7 @@ public static class EntryMapper
         List<AnalysisTagInfoDto> tags;
         tags = e.Analysis == null 
             ? [] 
-            : e.Analysis.EmotionTags.Select(et => new AnalysisTagInfoDto(new TagDto(et.TagId, et.Tag.Value), et.Value)).ToList();
+            : e.Analysis.EmotionTags.Select(et => new AnalysisTagInfoDto(new TagDto(et.TagId, et.Tag.RuName), et.Value)).ToList();
 
         return new EntryShortInfoDto(e.Id, e.Content, e.CreatedAt, e.UpdatedAt, tags);
     }
