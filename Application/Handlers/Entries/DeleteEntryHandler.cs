@@ -20,6 +20,7 @@ public class DeleteEntryHandler: IRequestHandler<Command>
     public async ValueTask<Unit> Handle(Command request, CancellationToken cancellationToken)
     {
         var entry = await _context.Entries
+            .AsSplitQuery()
             .Include(e => e.Analysis)
             .ThenInclude(a => a!.EmotionTags)
             .GetByIdAsync(request.EntryId, cancellationToken);

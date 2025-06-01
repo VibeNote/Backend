@@ -21,6 +21,7 @@ public class UpdateEntryHandler: IRequestHandler<Command, Response>
     public async ValueTask<Response> Handle(Command request, CancellationToken cancellationToken)
     {
         var entry = await _context.Entries
+            .AsSplitQuery()
             .Include(e => e.Analysis)
             .GetByIdAsync(request.UpdateEntry.Id, cancellationToken);
         if (entry.UserId != request.UserId)

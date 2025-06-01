@@ -22,6 +22,7 @@ public class GetEntryHandler: IRequestHandler<Query, Response>
     public async ValueTask<Response> Handle(Query request, CancellationToken cancellationToken)
     {
         var entry = await _context.Entries
+            .AsSplitQuery()
             .Include(e => e.Analysis)
             .ThenInclude(a => a!.EmotionTags)
             .ThenInclude(et => et.Tag)
@@ -29,6 +30,8 @@ public class GetEntryHandler: IRequestHandler<Query, Response>
             .ThenInclude(a => a!.EmotionTags)
             .ThenInclude(et => et.TriggerWords)
             .GetByIdAsync(request.EntryId, cancellationToken);
+        
+        
 
         if (entry.UserId != request.UserId)
         {

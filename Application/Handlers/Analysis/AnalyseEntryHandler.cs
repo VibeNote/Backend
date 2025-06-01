@@ -30,6 +30,7 @@ public class AnalyseEntryHandler : IRequestHandler<Command, Response>
     public async ValueTask<Response> Handle(Command request, CancellationToken cancellationToken)
     {
         var entry = await _context.Entries
+            .AsSplitQuery()
             .Include(e => e.Analysis)
             .GetByIdAsync(request.EntryId, cancellationToken);
 
@@ -41,8 +42,11 @@ public class AnalyseEntryHandler : IRequestHandler<Command, Response>
         var tags = await _analysisService.GetContentTagsAsync(entry.Content, cancellationToken);
         var result = await _analysisService.GetResultAsync(entry.Content, tags, cancellationToken);
         var tagsDict = await _context.Tags.AsQueryable().ToEnumDictionary(tags.Select(t => t.TagsEnum).ToList());
-        var sumValue = tags.Sum(t => t.Value);
-        var valuesDict = tags.ToDictionary(t => t.TagsEnum, t => Min((int)(t.Value / sumValue * 100), 100));
+        var sumValue = tags.Sum(t => (int)(t.Value * 100));
+        var valuesDict = tags
+            .ToDictionary(
+                t => t.TagsEnum, 
+                t => Min((int)((int)(t.Value * 100) / 100d), 100));
 
         var analysisId = Guid.NewGuid();
         var analysis = new Core.Entities.Analysis(analysisId, request.EntryId, result, DateTime.UtcNow);

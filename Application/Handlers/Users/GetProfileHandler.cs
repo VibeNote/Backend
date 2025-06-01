@@ -3,6 +3,7 @@ using Contracts.Users.Queries;
 using DataAccess.Abstractions;
 using DataAccess.Abstractions.Extensions;
 using Dto.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace Handlers.Users;
 
@@ -23,6 +24,7 @@ public class GetProfileHandler: IRequestHandler<Query, Response>
         
         var user = await _context
             .Users
+            .AsSplitQuery()
             .GetByIdAsync(userId, cancellationToken);
         
         return new Response(new UserInfoDto(user.Id, user.Login, user.UserName));
