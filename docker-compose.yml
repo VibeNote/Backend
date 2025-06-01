@@ -92,6 +92,10 @@ services:
     command: -config.file=/etc/loki/config.yaml
     volumes:
       - ./logs-metrics/loki/loki-config.yaml:/etc/loki/config.yaml
+      - ./logs-metrics/loki/chunks:/tmp/loki/chunks
+      - ./logs-metrics/loki/index:/tmp/loki/index
+      - ./logs-metrics/loki/boltdb-cache:/tmp/loki/boltdb-cache
+      - ./logs-metrics/loki/compactor:/tmp/loki/compactor
   
   grafana:
     image: grafana/grafana

@@ -5,6 +5,9 @@ server:
   grpc_listen_port: 9095
 
 ingester:
+  wal:
+    enabled: true
+    dir: /tmp/loki/wal
   lifecycler:
     ring:
       kvstore:
@@ -42,3 +45,6 @@ chunk_store_config:
 table_manager:
   retention_deletes_enabled: true
   retention_period: 7d
+
+compactor:
+  working_directory: /tmp/loki/compactor
