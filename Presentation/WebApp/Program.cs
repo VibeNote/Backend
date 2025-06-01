@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Prometheus;
 using WebApp.Configuration;
 using WebApp.Extensions;
 using WebApp.Extensions.Configuration;
@@ -20,6 +19,8 @@ configuration.AddEnvironmentVariables();
 var webAppConfiguration = new WebAppConfiguration(configuration);
 
 builder.Services.ConfigureWebApplication(webAppConfiguration);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 var app = builder.Build().Configure(webAppConfiguration);
 

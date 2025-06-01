@@ -18,14 +18,14 @@ public static class RegistrationExtensions
     
     public static IServiceCollection AddAnalysisService(
         this IServiceCollection services,
-        Func<IServiceProvider, Uri> getEmotionsUri,
-        Func<IServiceProvider, Uri> getRecommendationsUri)
+        Func<IServiceProvider, HttpClient> getEmotionsClient,
+        Func<IServiceProvider, HttpClient> getRecommendationsClient)
     {
         services
             .AddScoped<IAnalysisService>(s =>
                 new AnalysisService(
-                    getEmotionsUri(s),
-                    getRecommendationsUri(s)
+                    getEmotionsClient(s),
+                    getRecommendationsClient(s)
                 )
             );
         return services;

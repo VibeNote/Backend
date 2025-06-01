@@ -21,8 +21,17 @@ public static class ApplicationExtensions
             .AddHandlers()
             .AddProviders()
             .AddAnalysisService(
-                s => new Uri($"http://{configuration.ContainersConfiguration.EmotionsName}:{configuration.ContainersConfiguration.EmotionsPort}"),
-                s => new Uri($"http://{configuration.ContainersConfiguration.RecommendationsName}:{configuration.ContainersConfiguration.RecommendationsPort}")
+                s => new HttpClient
+                {
+                    BaseAddress =
+                        new Uri(
+                            $"http://{configuration.ContainersConfiguration.EmotionsName}:{configuration.ContainersConfiguration.EmotionsPort}")
+                },
+                s =>new HttpClient
+                {
+                    BaseAddress = new Uri(
+                            $"http://{configuration.ContainersConfiguration.RecommendationsName}:{configuration.ContainersConfiguration.RecommendationsPort}")
+                }
             );
 
         return services;
