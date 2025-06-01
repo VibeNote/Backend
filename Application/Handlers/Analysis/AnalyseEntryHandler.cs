@@ -46,7 +46,7 @@ public class AnalyseEntryHandler : IRequestHandler<Command, Response>
         var valuesDict = tags
             .ToDictionary(
                 t => t.TagsEnum, 
-                t => Min((int)((int)(t.Value * 100) / 100d), 100));
+                t => Min((int)Round(t.Value * 100 / sumValue), 100));
 
         var analysisId = Guid.NewGuid();
         var analysis = new Core.Entities.Analysis(analysisId, request.EntryId, result, DateTime.UtcNow);
