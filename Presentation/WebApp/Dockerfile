@@ -6,6 +6,8 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 
 RUN dotnet restore "VibeNote.sln"
 RUN dotnet publish "Presentation/WebApp/WebApp.csproj" -c Release -o /app/publish
+COPY .env /app/publish/
+COPY ./Presentation/WebApp/wwwroot /app/publish/wwwroot
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
