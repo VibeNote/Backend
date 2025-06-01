@@ -41,7 +41,8 @@ public class AnalyseEntryHandler : IRequestHandler<Command, Response>
         var tags = await _analysisService.GetContentTagsAsync(entry.Content, cancellationToken);
         var result = await _analysisService.GetResultAsync(entry.Content, tags, cancellationToken);
         var tagsDict = await _context.Tags.AsQueryable().ToEnumDictionary(tags.Select(t => t.TagsEnum).ToList());
-        var valuesDict = tags.ToDictionary(t => t.TagsEnum, t => Min((int)(t.Value * 100), 100));
+        var sumValue = tags.Sum(t => t.Value);
+        var valuesDict = tags.ToDictionary(t => t.TagsEnum, t => Min((int)(t.Value / sumValue * 100), 100));
 
         var analysisId = Guid.NewGuid();
         var analysis = new Core.Entities.Analysis(analysisId, request.EntryId, result, DateTime.UtcNow);

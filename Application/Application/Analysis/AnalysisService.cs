@@ -13,24 +13,18 @@ public class AnalysisService : IAnalysisService
     private const string Recommend = "/recommend";
     private const string Analyze = "/analyze";
 
-    private class TagsDictionary : Dictionary<string, double> { }
-    private class RecommendResponse
+    public class TagsDictionary : Dictionary<string, double> { }
+    public class RecommendResponse
     {
         public string Recommendation { get; set; } = string.Empty;
     }
 
     public AnalysisService(
-        Uri emotionsContainerUri,
-        Uri recommendationsContainerUri)
+        HttpClient emotionsContainerClient,
+        HttpClient recommendationsContainerClient)
     {
-        _emotionClient = new HttpClient
-        {
-            BaseAddress = emotionsContainerUri
-        };
-        _recomendationClient = new HttpClient
-        {
-            BaseAddress = recommendationsContainerUri
-        };
+        _emotionClient = emotionsContainerClient;
+        _recomendationClient = recommendationsContainerClient;
     }
 
     public async Task<IReadOnlyCollection<AnalysedTagDto>> GetContentTagsAsync(string content,
@@ -47,7 +41,7 @@ public class AnalysisService : IAnalysisService
         }
         return result
             .Select(td => new AnalysedTagDto(td.Key.FromEngName(), td.Value))
-            .Where(t => t.Value >= 0.2d)
+            .Where(t => t.Value >= 0.15d)
             .ToList();
     }
 
