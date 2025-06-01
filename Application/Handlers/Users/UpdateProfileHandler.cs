@@ -3,6 +3,7 @@ using DataAccess.Abstractions;
 using DataAccess.Abstractions.Extensions;
 using Dto.User;
 using Mediator;
+using Microsoft.EntityFrameworkCore;
 
 namespace Handlers.Users;
 
@@ -21,6 +22,7 @@ public class UpdateProfileHandler: IRequestHandler<Command, Response>
     public async ValueTask<Response> Handle(Command request, CancellationToken cancellationToken)
     {
         var user = await _context.Users
+            .AsSplitQuery()
             .GetByIdAsync(request.UpdateUser.UserId, cancellationToken);
 
         user.UserName = request.UpdateUser.Username;

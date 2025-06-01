@@ -1,4 +1,5 @@
 using Application.Abstractions.Analysis;
+using Common.Exceptions.ForbiddenExceptions;
 using Common.Exceptions.PreconditionFailedExceptions;
 using Common.Extentions;
 using Contracts.Analysis.Commands;
@@ -33,6 +34,11 @@ public class AnalyseEntryHandler : IRequestHandler<Command, Response>
             .AsSplitQuery()
             .Include(e => e.Analysis)
             .GetByIdAsync(request.EntryId, cancellationToken);
+
+        if (entry.UserId != request.UserId)
+        {
+            throw NotEnoughAccessException.UserCannotInteractWithEntry(request.UserId, request.EntryId);
+        }
 
         if (entry.Analysis != null)
         {

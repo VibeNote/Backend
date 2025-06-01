@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Common.Exceptions.InternalServerExceptions.Domain.Operation;
 using Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,14 +32,4 @@ public class Analysis: IEntity<Guid>
     public DateTime CreatedAt { get; set; }
     
     public virtual IReadOnlyCollection<EmotionTag> EmotionTags => _emotionTags;
-
-    public void AddEmotionTag(EmotionTag emotionTag)
-    {
-        if (_emotionTags.Any(et => et.Id == emotionTag.Id))
-        {
-            throw AnalysisInvalidDomainOperationException.AnalysisCannotAddEmotionTag(Id, emotionTag.Id);
-        }
-        
-        _emotionTags.Add(emotionTag);
-    }
 }

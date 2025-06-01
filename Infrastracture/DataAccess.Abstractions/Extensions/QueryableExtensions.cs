@@ -21,18 +21,4 @@ public static class QueryableExtensions
 
         return entity;
     }
-
-    public static async Task<TData> GetAsync<TData>(
-        this IQueryable<TData> queryable,
-        Expression<Func<TData, bool>> expression,
-        CancellationToken cancellationToken = default)
-        where TData : class
-    {
-        var entity = await queryable.FirstOrDefaultAsync(expression, cancellationToken);
-
-        if (entity is null)
-            throw EntityNotFoundException.For(expression);
-
-        return entity;
-    }
 }

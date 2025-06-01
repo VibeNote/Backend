@@ -1,9 +1,6 @@
 using Contracts.Entry.Queries;
-using Core.Entities;
 using DataAccess.Abstractions;
 using DataAccess.Abstractions.Extensions;
-using Dto.Entry;
-using Dto.Tag;
 using Mapper.Mappers;
 using Mediator;
 using Microsoft.EntityFrameworkCore;

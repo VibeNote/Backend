@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Common.Exceptions.InternalServerExceptions.Domain.Operation;
 using Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,16 +34,4 @@ public class EmotionTag: IEntity<Guid>
     
     [ForeignKey("TagId")]
     public virtual Tag Tag { get; protected set; } = null!;
-
-        
-    public void AddEmotionTag(TriggerWord triggerWord)
-    {
-        if (_triggerWords.Any(tw => tw.Id == triggerWord.Id))
-        {
-            throw EmotionTagInvalidDomainOperationException.EmotionTagCannotAddTriggerWord(Id, triggerWord.Id);
-        }
-        
-        _triggerWords.Add(triggerWord);
-    }
-    
 }

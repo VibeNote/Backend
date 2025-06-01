@@ -16,14 +16,12 @@ public class UserService: IUserService
     private readonly IVibeNoteDatabaseContext _context;
     private readonly ITokenGenerator _tokenGenerator;
     private readonly IPasswordHasher _passwordHasher;
-    private readonly IDateTimeProvider _dateTimeProvider;
 
-    public UserService(IVibeNoteDatabaseContext context, ITokenGenerator tokenGenerator, IPasswordHasher passwordHasher, IDateTimeProvider dateTimeProvider)
+    public UserService(IVibeNoteDatabaseContext context, ITokenGenerator tokenGenerator, IPasswordHasher passwordHasher)
     {
         _context = context;
         _tokenGenerator = tokenGenerator;
         _passwordHasher = passwordHasher;
-        _dateTimeProvider = dateTimeProvider;
     }
     
     public async Task<TokenDto> Login(CredentialsDto credentials, CancellationToken cancellationToken)
